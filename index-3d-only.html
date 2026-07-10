@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>alle für alle – Startseite</title>
+  <link rel="stylesheet" href="https://use.typekit.net/ugq7coe.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      <img src="Fotos/Logo.png" alt="alle für alle" class="logo-img" />
+    </a>
+    <button class="nav-toggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="problem.html">Problem</a></li>
+        <li><a href="konzept.html">Konzept</a></li>
+        <li><a href="wirkung.html">Wirkung</a></li>
+        <li><a href="forschung.html">Forschung</a></li>
+        <li><a href="ueber-uns.html">Über Uns</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="scene-wrapper">
+    <div id="scene-container"></div>
+    <p class="viewer-hint">Ziehen zum Drehen · Scrollen zum Zoomen · Klick auf ein Element für mehr Infos</p>
+    <div class="legend">
+      <span>Decke: 4 Formate</span><span data-hotspot="inseln">Gesprächsinseln</span><span data-hotspot="irritationsobjekt">Irritationsobjekt</span><span data-hotspot="wand">Kommunikationswand</span><span data-hotspot="tuer">Tür</span><span data-hotspot="eisbrecher">Eisbrecherkarten</span><span data-hotspot="kueche">Kaffee-/Teeküche</span><span data-hotspot="moderation">Moderation</span>
+    </div>
+    <button id="reset-view" class="reset-view">Ansicht zurücksetzen</button>
+  </main>
+
+  <div id="popup-overlay" class="popup-overlay">
+    <div class="popup-card">
+      <button id="popup-close" class="popup-close" aria-label="Schließen">&times;</button>
+      <span class="popup-kicker">alle für alle</span>
+      <h3 id="popup-title"></h3>
+      <p id="popup-text"></p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/scene.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+/* Scroll-Variante der Startseite, angelehnt an non-objective.works:
+   1) großer, linksbündiger Intro-Absatz
+   2) Menü darunter, im normalen Textfluss, groß & über die Breite verteilt
+   3) beim Scrollen bleibt das Menü auf halber Bildschirmhöhe "kleben"
+      (position: sticky mit top ungleich 0), komplett transparent hinterlegt
+   4) sobald die Raumskizze erreicht ist, springt das Menü an den oberen Rand
+      (Klassenwechsel per kleinem Scroll-Listener in index-scroll.html), damit
+      es nicht mittig über der Skizze liegt */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Text oben, Menü unten – Flexbox verteilt beides über die volle erste
+   Bildschirmhöhe, ohne dass das Menü über den unteren Rand hinausragt (wie
+   es bei einem festen 100vh auf .hero allein passieren würde). */
+.intro-viewport {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero {
+  padding: 2.5rem 2rem 1.5rem;
+  background: var(--bg);
+}
+
+.hero-text {
+  max-width: 1500px;
+  font-size: 2rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--header-text);
+  margin: 0;
+  text-align: left;
+}
+
+.hero-text .accent {
+  color: #f08b88;
+}
+
+/* Menü ist ein normales Element im Textfluss direkt nach .hero (landet am
+   unteren Rand des ersten Bildschirms) und scrollt mit Text und Bild-Sektion
+   einfach weg wie jeder andere Inhalt. Erst sobald die Raumskizze den oberen
+   Bildschirmrand erreicht (Klassenwechsel per JS in index-scroll.html), wird
+   es fixiert und bleibt dort stehen – Logo und Menü gemeinsam. */
+.scroll-home .site-header {
+  position: static;
+  z-index: 60;
+  background: transparent;
+  border-bottom: none;
+}
+
+.scroll-home .site-header.header-pinned-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border);
+}
+
+.scroll-home .logo-img {
+  height: 46px;
+}
+
+.scroll-home .main-nav ul {
+  gap: 2.75rem;
+}
+
+.scroll-home .main-nav a {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.image-section {
+  position: relative;
+  min-height: 140vh;
+  overflow: hidden;
+}
+
+.image-section::before {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  background-image: url("../hintergrundbild_website.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(14px) saturate(0.85);
+}
+
+/* Feine Papier-/Pinsel-Körnung über dem weichgezeichneten Bild. */
+.image-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+}
+
+.scroll-home .scene-wrapper {
+  height: 100vh;
+}
+
+/* Der Hinweis ist absolut positioniert – padding/margin des Elternteils
+   verschiebt ihn NICHT automatisch, daher direkt per CSS-Variable (aus der
+   echten Menü-Höhe, siehe index-scroll.html) nach unten versetzt, damit er
+   nie unter dem oben fixierten Menü verschwindet. */
+.scroll-home .viewer-hint {
+  top: calc(var(--menu-height, 0px) + 1.25rem);
+}
