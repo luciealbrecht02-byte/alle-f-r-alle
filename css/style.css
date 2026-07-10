@@ -4,6 +4,12 @@
   --text: #1a1a1a;
   --muted: #5b6472;
   --border: #e5e8ee;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
 }
 
 * {
@@ -36,7 +42,6 @@ a {
   justify-content: space-between;
   padding: 1rem 2rem;
   background: var(--bg);
-  border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -75,7 +80,7 @@ a {
 
 .main-nav ul {
   display: flex;
-  gap: 2rem;
+  gap: 2.75rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -84,8 +89,10 @@ a {
 .main-nav a {
   color: var(--header-text);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
   font-size: 0.95rem;
+  letter-spacing: 0.02em;
   padding-bottom: 0.3rem;
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease;
@@ -158,9 +165,13 @@ a {
   border-radius: 999px;
   font-size: 0.85rem;
   color: var(--muted);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   pointer-events: none;
   text-align: center;
+  transition: opacity 0.6s ease;
+}
+
+.viewer-hint.hint-hidden {
+  opacity: 0;
 }
 
 .reset-view {
@@ -168,19 +179,19 @@ a {
   bottom: 1.25rem;
   right: 1.25rem;
   background: #ffffff;
-  border: 1px solid var(--header-text);
   color: var(--header-text);
   padding: 0.55rem 1.1rem;
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: none;
+  outline: none;
+  transition: text-decoration 0.15s ease;
 }
 
 .reset-view:hover {
-  background: var(--header-text);
-  color: #fff;
+  text-decoration: underline;
 }
 
 .legend {
@@ -188,14 +199,13 @@ a {
   bottom: 1.25rem;
   left: 1.25rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   gap: 0.5rem;
   max-width: 60%;
 }
 
 .legend span {
   background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.78rem;
   padding: 0.3rem 0.7rem;
@@ -204,13 +214,11 @@ a {
 
 .legend span[data-hotspot] {
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 .legend span[data-hotspot]:hover {
-  background: var(--header-text);
-  color: #fff;
-  border-color: var(--header-text);
+  color: var(--header-text);
 }
 
 @media (max-width: 768px) {
@@ -301,18 +309,38 @@ a {
 /* Content pages */
 
 .page-content {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 8rem;
+  margin: 0;
+  padding: 2.5rem 1.5rem 8rem var(--content-left, 1.5rem);
   line-height: 1.75;
 }
 
+/* Wenn die Seite ein Feature-Grid enthält, füllt der Inhalt den restlichen
+   Viewport unter dem Menü und verteilt Statement/Grid auf oben/unten –
+   dadurch ist alles ohne Scrollen sichtbar. */
+.page-content:has(.feature-grid) {
+  min-height: calc(100vh - var(--menu-height, 70px));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: var(--space-lg);
+}
+
+.page-problem .page-content {
+  padding-right: var(--content-left, 1.5rem);
+}
+
+.page-content h2,
+.page-content p,
+.page-content .placeholder-note,
+.page-content .sources-list {
+  max-width: 860px;
+}
+
 .page-content h2 {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 1.3rem;
-  letter-spacing: -0.005em;
-  margin: 4.5rem 0 1.1rem;
+  color: var(--header-text);
+  font-weight: 400;
+  font-size: 1.05rem;
+  margin: 3.5rem 0 1.1rem;
 }
 
 .page-content h2:first-of-type {
@@ -325,15 +353,81 @@ a {
 }
 
 .page-content strong {
-  font-weight: 600;
+  font-weight: 400;
+  color: var(--header-text);
 }
 
 .page-content .lead {
+  max-width: 1800px;
   font-size: 2rem;
-  font-weight: 500;
-  color: var(--header-text);
+  font-weight: 400;
+  color: var(--text);
   line-height: 1.35;
-  margin: 0 0 1rem;
+  margin: 0 0 6rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  column-gap: var(--space-md);
+  row-gap: var(--space-lg);
+  width: 100%;
+  margin-top: var(--space-lg);
+}
+
+.feature-item h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.feature-item p {
+  margin: 0;
+}
+
+.editorial-section {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  column-gap: var(--space-md);
+  align-items: baseline;
+  max-width: 860px;
+  margin-top: var(--space-xl);
+}
+
+.editorial-index {
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.editorial-body h2 {
+  margin-top: 0;
+}
+
+/* Mehr Luft und schmalere Spalte, näher am Startseiten-Gefühl. */
+.page-wirkung .page-content h2,
+.page-wirkung .page-content p,
+.page-wirkung .editorial-section,
+.page-wirkung .page-content .placeholder-note,
+.page-wirkung .page-content .sources-list,
+.page-problem .page-content .placeholder-note,
+.page-problem .page-content .sources-list {
+  max-width: 680px;
+}
+
+/* Variante 2: feine Papier-/Pinsel-Körnung wie auf der Startseite,
+   sehr dezent über dem Content liegend. */
+.page-wirkung .page-content {
+  position: relative;
+}
+
+.page-wirkung .page-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
 }
 
 .placeholder-note {

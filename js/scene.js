@@ -94,7 +94,7 @@ Promise.all([
 
 function init() {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf7f8fa);
+  scene.background = new THREE.Color(0xffffff);
 
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -150,6 +150,13 @@ function init() {
   document.querySelectorAll(".legend span[data-hotspot]").forEach((chip) => {
     chip.addEventListener("click", () => openPopup(chip.dataset.hotspot));
   });
+
+  // Hinweis blendet nach ein paar Sekunden aus, damit er die Sicht von oben
+  // auf den Raum nicht dauerhaft stört.
+  const viewerHint = document.querySelector(".viewer-hint");
+  if (viewerHint) {
+    setTimeout(() => viewerHint.classList.add("hint-hidden"), 4000);
+  }
 }
 
 function addLights() {
@@ -265,6 +272,12 @@ function buildRoom() {
   floor.receiveShadow = false;
   tagHotspot(floor, "raum");
   scene.add(floor);
+
+  // Dünne Umrisslinie um den Boden, im gleichen Stil wie die Wand-Umrisse.
+  const floorOutline = createWallOutline(ROOM_WIDTH, ROOM_DEPTH);
+  floorOutline.rotation.x = -Math.PI / 2;
+  floorOutline.position.y = 0.01;
+  scene.add(floorOutline);
 
   // Rückwand mit Fenster/Whiteboard – "Wände als Kommunikationsfläche"
   // Wände sind nur als Umriss dargestellt, keine geschlossene Fläche.
