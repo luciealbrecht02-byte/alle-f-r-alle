@@ -164,6 +164,21 @@ a {
   overflow: hidden;
 }
 
+/* Konzept-Seite (nur 3D-Ansicht, kein Scroll-Intro davor): Menü liegt wie
+   auf der Startseite fest über der Szene, damit die Canvas-Höhe (und
+   damit die Kamera-Perspektive auf den Raum) exakt identisch ist. */
+.page-3d-only .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+}
+
+.page-3d-only .scene-wrapper {
+  height: 100vh;
+}
+
 #scene-container {
   width: 100%;
   height: 100%;

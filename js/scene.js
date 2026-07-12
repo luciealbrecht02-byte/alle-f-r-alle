@@ -32,9 +32,13 @@ const HOTSPOTS = {
     title: "Gemeinsam weiterdenken",
     text: "Was bewegt die Uni gerade wirklich? Aktuelle Fragen landen auf Karten und werden in wechselnden Kleingruppen gemeinsam weitergedacht.",
   },
+  formate: {
+    title: "Formate",
+    text: "Unsere Formate dienen der gezielten Aktivierung sozialer Interaktion und der kontinuierlichen Durchmischung der Besuchenden. Du findest eine Übersicht an der Raumdecke.",
+  },
   inseln: {
     title: "Gesprächsinseln",
-    text: "3 bis 6 Stühle, mal mit, mal ohne Tisch – die Gesprächsinseln lassen sich flexibel umbauen und stehen bewusst nah beieinander. So wechselst du unkompliziert von einer Runde in die nächste.",
+    text: "3 bis 6 Stühle, mal mit, mal ohne Tisch – die Gesprächsinseln lassen sich flexibel umbauen und stehen bewusst nah beieinander. So begegnen sich alle auf Augenhöhe und es ist ein unkomplizierter Wechsel von einer Runde in die nächste möglich.",
   },
   irritationsobjekt: {
     title: "Irritationsobjekt",
@@ -42,19 +46,19 @@ const HOTSPOTS = {
   },
   wand: {
     title: "Wände als Kommunikationsfläche",
-    text: "Die Wände sind keine Deko, sondern Mitmach-Fläche: Whiteboards nehmen Fragen und Ideen auf. Und weil der Raum alle vier Wochen umzieht, wandert die Dokumentationswand mit – Fotos und Zitate aus vorherigen Runden bleiben sichtbar.",
+    text: "Die Wände sind keine Deko, sondern Mitmach-Fläche: Whiteboards nehmen Fragen und Ideen auf. Und weil der Raum alle vier Wochen umzieht, wandert die Dokumentationswand mit – Fotos und Zitate aus vorherigen Standorten bleiben sichtbar.",
   },
   tuer: {
     title: "Wegweiser & Türposter",
-    text: "Poster und Wegweiser an der Tür zeigen auf einen Blick, worum es hier geht – inklusive Raumplan und Guide für die Moderation.",
+    text: "Poster und Wegweiser an der Tür zeigen auf einen Blick, worum es hier geht.",
   },
   eisbrecher: {
     title: "Eisbrecherkarten",
-    text: "Wähle deine Gesprächsinsel nicht nach Studiengang, sondern nach einem Satz, der zu dir passt. Von locker bis persönlich – die Karten sorgen für einen Einstieg, der nichts mit der eigenen Bubble zu tun hat.",
+    text: "Wähle deine Gesprächsinsel anhand der Statements auf den Eisbrecherkarten aus. Setze dich zu dem Statement, das dich am meisten anspricht. Finde heraus, was dich mit den anderen auf dieser Insel verbindet: Warum habt ihr euch für dasselbe Statement entschieden?",
   },
   raum: {
     title: "Kompakter Raum",
-    text: "Groß genug für Bewegungsfreiheit, klein genug, um sich nicht zu verlieren. Ohne Bühne und Stuhlreihen begegnen sich hier alle auf Augenhöhe – barrierefrei und mit variablen Sitzhöhen.",
+    text: "Groß genug für Bewegungsfreiheit, klein genug, um sich nicht zu verlieren. Ohne Bühne und Stuhlreihen begegnen sich hier alle auf Augenhöhe.",
   },
   kueche: {
     title: "Kaffee- & Teeküche",
@@ -62,15 +66,15 @@ const HOTSPOTS = {
   },
   moderation: {
     title: "Moderation",
-    text: "Sie sorgt für einen guten Start: begrüßt, stellt kurz vor, bringt den Ball ins Rollen. Übernommen wird die Rolle am besten von jemandem, der in mehreren Bubbles zu Hause ist – und nach einer Weile gerne weitergegeben.",
+    text: "Sie sorgt für einen guten Start: begrüßt, stellt kurz vor, bringt den Ball ins Rollen. Übernommen wird die Rolle am besten von jemandem, der in mehreren Microbubbles zu Hause ist – und nach einer Weile gerne weitergegeben.",
   },
   starterpaket: {
     title: "Starterpaket",
-    text: "Das „alle für alle“-Starterpaket liegt an der Tür bereit: Eisbrecherkarten auf vier Ebenen, ein Manifest mit den Grundprinzipien, ein Raumplan und ein Guide für die Moderation mit Ablauf, Zeitplan und Gesprächsregeln.",
+    text: "Das „alle für alle“ Starterpaket stellt bereit: Eisbrecherkarten auf vier Ebenen, ein Manifest mit den Grundprinzipien, ein Raumplan und ein Guide für die Moderation mit Ablauf, Zeitplan und Gesprächsregeln.",
   },
   wandernderraum: {
     title: "Ein wandernder Raum",
-    text: "Der Raum bleibt nicht an einem Ort: Er wandert etwa alle vier Wochen zu einem anderen Standort der UdK weiter, damit keine Fakultät bevorzugt wird. Eine Dokumentationswand zieht mit um und macht sichtbar, was an früheren Standorten schon entstanden ist.",
+    text: "Der Raum bleibt nicht an einem Ort: Er wandert etwa alle vier Wochen zu einem anderen Standort der UdK weiter, damit keine Fakultät bevorzugt wird.",
   },
 };
 

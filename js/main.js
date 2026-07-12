@@ -69,4 +69,31 @@ document.addEventListener("DOMContentLoaded", () => {
       document.fonts.ready.then(alignForschungImage);
     }
   }
+
+  const forschungScreen3Image = document.querySelector(
+    "#forschung-screen-3 .forschung-room-image"
+  );
+  const forschungScreen3Text = document.querySelector(
+    "#forschung-screen-3 .problem-text"
+  );
+
+  if (forschungScreen3Image && forschungScreen3Text) {
+    const alignForschungScreen3Text = () => {
+      const copy = forschungScreen3Text.closest(".problem-copy");
+      if (!copy) return;
+      // Vor der Messung zurücksetzen, damit sich der Versatz bei
+      // wiederholten Aufrufen (Resize, Font-Load) nicht aufsummiert.
+      copy.style.transform = "";
+      const offset =
+        forschungScreen3Image.getBoundingClientRect().top -
+        forschungScreen3Text.getBoundingClientRect().top;
+      copy.style.transform = `translateY(${offset}px)`;
+    };
+
+    alignForschungScreen3Text();
+    window.addEventListener("resize", alignForschungScreen3Text);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(alignForschungScreen3Text);
+    }
+  }
 });

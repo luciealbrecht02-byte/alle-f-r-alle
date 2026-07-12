@@ -100,6 +100,7 @@
   margin-top: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25 * 2 + 1.25rem);
 }
 
+
 @media (max-width: 900px) {
   .forschung-room-image {
     display: none;

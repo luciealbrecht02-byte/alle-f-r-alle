@@ -31,6 +31,7 @@ body.page-problem .site-header {
   grid-row: 1;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  align-content: start;
   padding-bottom: var(--space-md);
 }
 
@@ -59,6 +60,13 @@ body.page-problem .site-header {
   color: var(--text);
   text-align: justify;
   text-justify: inter-word;
+}
+
+/* Gleicher Gesamtabstand zu .lead wie auf Forschung (dort über eine
+   Mindesthöhe von zwei Zeilen auf .lead gelöst) – hier stattdessen über
+   die Position von p selbst, ohne .lead zu verändern. */
+.page-problem .problem-copy .problem-text {
+  margin-top: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25);
 }
 
 .problem-copy .problem-text + .problem-text {
