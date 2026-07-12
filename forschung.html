@@ -6,8 +6,18 @@
   <title>alle für alle – Forschung</title>
   <link rel="stylesheet" href="https://use.typekit.net/ugq7coe.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/problem.css" />
+  <link rel="stylesheet" href="css/forschung.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="page-forschung">
   <header class="site-header">
     <a href="index.html" class="logo">
       <img src="Fotos/Logo.png" alt="alle für alle" class="logo-img" />
@@ -18,84 +28,104 @@
     <nav class="main-nav">
       <ul>
         <li><a href="problem.html">Problem</a></li>
-        <li><a href="konzept.html">Konzept</a></li>
-        <li><a href="wirkung.html">Wirkung</a></li>
         <li><a href="forschung.html" class="active">Forschung</a></li>
+        <li><a href="index-3d-only.html">Konzept</a></li>
         <li><a href="ueber-uns.html">Über Uns</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="page-content">
-    <p class="lead">
-      Unser Raumkonzept basiert auf wissenschaftlichen Erkenntnissen aus
-      Netzwerktheorie, Sozialpsychologie und Kontaktforschung.
-    </p>
+  <div class="forschung-screen" id="forschung-screen-1">
+    <main class="problem-grid">
+      <figure class="forschung-room-image">
+        <img src="Bild_Screen1.png" alt="Bild_Screen1" />
+      </figure>
 
-    <h2>Was ist eine Bubble?</h2>
-    <p>
-      Der Begriff stammt ursprünglich aus dem digitalen Kontext: Eli Pariser
-      prägte den Begriff der „Filterblase“, um zu beschreiben, wie Algorithmen
-      Inhalte personalisieren und Nutzende zunehmend mit Perspektiven
-      konfrontieren, die ihren bestehenden Überzeugungen entsprechen (Pariser,
-      2011). Wer innerhalb einer Blase operiert, beobachtet die Welt durch
-      deren spezifische Sprache, Normen und Routinen, ohne die eigene
-      Perspektive als kontingent wahrzunehmen (Luhmann, 1984). Diese
-      Orientierungen manifestieren sich im Sinne der Praxistheorie nach
-      Reckwitz (2003) sowie Bourdieus (1982) Konzept des Habitus in
-      wertgeleiteten, habitualisierten Praktiken des Alltags.
-    </p>
-    <p>
-      Wir definieren eine Bubble als einen strukturierten
-      Wahrscheinlichkeitsraum sozialer Interaktion, der sich aus
-      strukturellen, räumlichen oder sozialen Bedingungen ergibt – kein
-      geschlossene Gruppe von Individuen, sondern ein relationales Netzwerk,
-      in dem die Wahrscheinlichkeit bestimmter Interaktionen erhöht oder
-      reduziert wird (Borgatti et al., 2009). Soziale Homophilie, die Tendenz,
-      sich bevorzugt mit ähnlichen Personen zu umgeben (McPherson et al.,
-      2001), stabilisiert dieses Netzwerk zu einem „Network Closure“: Vertrauen
-      und Normen verstärken sich nach innen, während externe Perspektiven
-      seltener eindringen (Coleman, 1988).
-    </p>
+      <div class="problem-copy">
+        <p class="lead">Warum gibt es an der Universität Bubbles?</p>
+        <p class="problem-text">
+          Obwohl Campus, Mensa und gemeinsame Lehrformate die UdK formal zu
+          einem offenen Begegnungsraum machen, bilden sich scharf
+          abgegrenzte Mikroblasen. Der Grund liegt in der Tiefe der
+          disziplinären Habitusbildung (Bourdieu, 1982). Über Semester
+          hinweg entstehen feste Wissensordnungen, die bestimmen, was
+          innerhalb eines Studiengangs als relevant gilt, etwa die
+          „GWK-Brille“ in der Gesellschafts- und Wirtschaftskommunikation.
+          Eingeübte Praktiken wie strategisches Pitchen oder prozesshaftes
+          Arbeiten fühlen sich für die jeweiligen Mitwirkenden einfach
+          „richtig“ an (Reckwitz, 2003), während die Grenze der eigenen
+          Bubble dabei unsichtbar bleibt (Luhmann, 1984).
+        </p>
+        <p class="problem-text">
+          Verstärkt wird das durch räumliche Nähe (Festinger et al., 1950)
+          und soziale Homophilie, also die Tendenz, sich bevorzugt mit
+          ähnlichen Personen zu umgeben (McPherson et al., 2001): Wer sich
+          raumzeitlich meist in denselben Institutsgebäuden aufhält und
+          mit Gleichgesinnten interagiert, bleibt unter seinesgleichen,
+          sodass sich das Netzwerk durch Network Closure abschließt, noch
+          bevor interdisziplinärer Austausch überhaupt entstehen kann.
+        </p>
+        <p class="problem-text">
+          Im Rahmen dieses Projekts definieren wir eine
+          <span class="accent">Bubble als einen Wahrscheinlichkeitsraum
+          sozialer Interaktion</span>, der sich aus strukturellen,
+          räumlichen oder sozialen Bedingungen ergibt.
+        </p>
+      </div>
+    </main>
+  </div>
 
-    <h2>Makro- und Mikroblasen an der UdK</h2>
-    <p>
-      Makroblasen bilden den institutionellen Rahmen (z. B. die gesamte UdK),
-      innerhalb dessen sich dynamische, dicht vernetzte Mikroblasen bilden –
-      etwa Studiengänge, Jahrgänge oder informelle Freundeskreise. Obwohl die
-      UdK über Campus, Mensa und Lehrformate formal als offener
-      Begegnungsraum konzipiert ist, bilden sich scharf abgegrenzte
-      Mikroblasen aus. Diese stumme Koexistenz resultiert nicht aus fehlenden
-      physischen Begegnungsmöglichkeiten, sondern aus der Tiefe der
-      disziplinären Habitusbildung (Bourdieu, 1982), verstärkt durch
-      Propinquity (räumliche Nähe) und Network Closure.
-    </p>
+  <div class="forschung-screen" id="forschung-screen-2">
+    <main class="problem-grid">
+      <figure class="forschung-bubble-image">
+        <img src="Bubble_Screen2.png" alt="Bubble_Screen2" />
+      </figure>
 
-    <h2>Warum analoge Begegnung?</h2>
-    <p>
-      Nach Müller (2026) entsteht Demokratie auch durch die räumlichen
-      Bedingungen, unter denen Menschen einander begegnen: Erst durch
-      Begegnungen mit Perspektiven außerhalb der eigenen Lebens- und
-      Erfahrungswelt wird demokratischer Austausch möglich. Allports
-      Kontakthypothese (1954) liefert die Bedingungen, unter denen dieser
-      Kontakt Vorurteile abbaut statt sie zu verstärken: gleicher Status,
-      gemeinsame Ziele, Kooperation statt Wettbewerb und institutionelle
-      Unterstützung.
-    </p>
+      <div class="problem-copy">
+        <p class="lead">Unsere Theorie: Macro- und Microbubbles</p>
+        <p class="problem-text">
+          Macrobubbles bilden den institutionellen Rahmen und bestimmen,
+          welche Personen grundsätzlich Teil desselben sozialen Systems
+          sind und somit miteinander in Kontakt kommen können. In unserem
+          Beispiel ist das die UdK.
+        </p>
+        <p class="problem-text">
+          Microbubbles entstehen darin als dynamische, dichte
+          Teilnetzwerke. In ihnen ist die Wahrscheinlichkeit für
+          Interaktionen stark erhöht, während sie nach außen hin abnimmt
+          (Dederichs et al., 2025). Sie bilden sich sowohl durch formale
+          Vorgaben (Studiengänge oder Projektteams) als auch durch
+          informelle Dynamiken (Freundeskreise oder Pausenroutinen).
+        </p>
+      </div>
+    </main>
+  </div>
 
-    <h2>Quellen &amp; Literatur</h2>
-    <p class="sources-list">
-      Allport (1954) · Bourdieu (1982) · Borgatti et al. (2009) · Burt &amp;
-      Opper (2024) · Coleman (1988) · Goffman (1963) · Lippman (2023) ·
-      Luhmann (1984) · McPherson et al. (2001) · Müller (2026) · Oldenburg
-      (1989) · Pariser (2011) · Reckwitz (2003) · Sommer (1969) · Tilly (2005)
-    </p>
-  </main>
+  <div class="forschung-screen" id="forschung-screen-3">
+    <main class="problem-grid">
+      <figure class="forschung-room-image">
+        <img src="Bubble_Screen3.png" alt="Bubble_Screen3" />
+      </figure>
 
-  <footer class="site-footer">
-    &copy; 2026 alle für alle
-  </footer>
+      <div class="problem-copy">
+        <p class="lead">Warum wird die Bubble geburstet?</p>
+        <p class="problem-text">
+          alle für alle schafft ein Gelegenheitsfenster, in dem die Grenzen
+          bestehender Microbubbles durchlässiger werden. Durch die bewusste
+          Gestaltung von Raum, Formaten und Moderation werden Begegnungen
+          ermöglicht, die im institutionellen Alltag unwahrscheinlich
+          bleiben würden. Im gemeinsamen Austausch treffen unterschiedliche
+          Perspektiven aufeinander, wodurch die eigene Sichtweise als eine
+          von mehreren möglichen Perspektiven erfahrbar wird. So wird eine
+          Beobachtung zweiter Ordnung im Sinne Luhmanns wahrscheinlicher
+          und es können neue soziale Verbindungen über bestehende
+          Microbubbles hinweg entstehen.
+        </p>
+      </div>
+    </main>
+  </div>
 
   <script src="js/main.js"></script>
+  <script type="module" src="js/bubble-diagram.js"></script>
 </body>
 </html>

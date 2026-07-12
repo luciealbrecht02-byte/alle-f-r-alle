@@ -1,0 +1,136 @@
+/* Forschung-Seite: erster Screen im Problem-Layout (via problem.css
+   wiederverwendet), danach scrollt die Seite normal weiter zu zwei
+   weiteren Screens. Das Menü ist sticky wie auf der Konzept-Seite
+   (siehe .site-header in style.css) – keine Forschung-spezifische
+   Override nötig. */
+
+.forschung-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.forschung-screen .problem-grid {
+  flex: 1;
+  min-height: 0;
+}
+
+/* .lead ist auf allen drei Screens unterschiedlich lang und bricht bei
+   manchen Fensterbreiten ein- oder zweizeilig um – das würde den
+   Abstand zu p von Screen zu Screen verschieben. Feste Mindesthöhe für
+   zwei Zeilen sorgt dafür, dass der Abstand immer identisch bleibt. */
+.page-forschung .problem-copy .lead {
+  min-height: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25 * 2);
+}
+
+/* Screen 3 ist der letzte Screen der Seite – hier soll der Inhalt nicht
+   auf volle Bildschirmhöhe gestreckt werden, sondern denselben
+   Abstand zum Seitenende haben wie .konzept-grid (padding-bottom: 5rem). */
+#forschung-screen-3 {
+  min-height: auto;
+}
+
+#forschung-screen-3 .problem-grid {
+  padding-bottom: 5rem;
+}
+
+.bubble-diagram {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  align-self: end;
+  width: 100%;
+  height: 380px;
+}
+
+/* Screen 2: Bild und Text getauscht (Bild rechts, Text links), im
+   selben Raster wie die Konzept-Seite – Text ab Spalte 2, Bildbreite
+   über dieselbe calc-Formel wie .konzept-visual, damit die Abstände
+   links/rechts identisch zu Konzept bleiben. */
+#forschung-screen-2 .problem-copy {
+  grid-column: 2 / 7;
+}
+
+.forschung-bubble-image {
+  grid-column: 7 / 13;
+  grid-row: 1;
+  align-self: end;
+  width: calc((100vw - 4rem - 11 * var(--space-md)) * 5 / 12 + 4 * var(--space-md));
+  height: 480px;
+  justify-self: start;
+  margin: 0;
+}
+
+.forschung-bubble-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .bubble-diagram,
+  .forschung-bubble-image {
+    display: none;
+  }
+}
+
+/* Screen 3: statische Raumskizze an derselben Stelle wie das
+   Bubble-Diagram auf Screen 1. */
+.forschung-room-image {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  align-self: end;
+  width: 100%;
+  height: 380px;
+  margin: 0;
+}
+
+.forschung-room-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Screen 1: Bild bündig mit der Zeile, in der der Fließtext (p)
+   beginnt – Fallback bis js/main.js den exakten, gemessenen Versatz
+   per Inline-Style setzt (siehe alignForschungImage). */
+#forschung-screen-1 .forschung-room-image {
+  align-self: start;
+  margin-top: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25 * 2 + 1.25rem);
+}
+
+@media (max-width: 900px) {
+  .forschung-room-image {
+    display: none;
+  }
+}
+
+/* Durchgehender Bild-Bereich zwischen den Screens, gleicher Stil wie
+   der Bild-Bereich auf der Startseite (weichgezeichnet + Körnung). */
+.forschung-image-section {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+.forschung-image-section::before {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  background-image: url("../hintergrundbild_website.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+}
+
+.forschung-image-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+}

@@ -1,0 +1,186 @@
+/* Konzept-Seite: gleiches Grid-System wie Problem – fester Seitenrand
+   (kein Zirkelbezug auf --content-left), Inhalt beginnt bei Spalte 7. */
+
+.konzept-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--space-md);
+  padding: var(--space-lg) 2rem 5rem 2rem;
+}
+
+.konzept-copy {
+  grid-column: 2 / 7;
+}
+
+.konzept-copy .lead {
+  max-width: none;
+  font-size: clamp(1.2rem, 1.7vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+
+/* Split-Screen: links sticky Bild/Platzhalter, rechts scrollender Text.
+   Eigenes 12-Spalten-Grid, an denselben Rand wie .konzept-grid gebunden. */
+.konzept-split {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--space-md);
+}
+
+.konzept-visual {
+  grid-column: 7 / 13;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+  width: calc((100vw - 4rem - 11 * var(--space-md)) * 5 / 12 + 4 * var(--space-md));
+  position: sticky;
+  top: var(--menu-height, 70px);
+  height: calc(100vh - var(--menu-height, 70px));
+  overflow: hidden;
+}
+
+.konzept-visual-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.konzept-visual-slide.is-active {
+  opacity: 1;
+}
+
+.konzept-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(32, 79, 158, 0.1);
+}
+
+.konzept-visual-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--bg);
+}
+
+.konzept-visual-slide:nth-child(even) .konzept-placeholder {
+  background-color: rgba(240, 139, 136, 0.14);
+}
+
+.konzept-icon {
+  width: 30%;
+  max-width: 160px;
+  fill: none;
+  stroke: var(--header-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.konzept-visual-slide:nth-child(even) .konzept-icon {
+  stroke: #f08b88;
+}
+
+.konzept-collage-slide {
+  display: flex;
+  flex-direction: column;
+}
+
+.konzept-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 2px;
+  row-gap: 0;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.konzept-caption {
+  flex: none;
+  padding: 0.6rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  text-align: center;
+}
+
+.konzept-collage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--bg);
+  border-radius: 0;
+}
+
+.konzept-sections {
+  grid-column: 2 / 7;
+  grid-row: 1;
+}
+
+.konzept-sections .editorial-section {
+  grid-template-columns: 1fr;
+}
+
+/* Gleiche Fließtext-Breite wie auf Problem: 5 von 12 Grid-Spalten
+   (inkl. der 4 Zwischenräume dazwischen), bezogen auf denselben 2rem-Rand. */
+.konzept-sections .editorial-body {
+  max-width: calc((100vw - 4rem - 11 * var(--space-md)) * 5 / 12 + 4 * var(--space-md));
+}
+
+.konzept-sections .editorial-body p {
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.konzept-sections .editorial-body h2 {
+  font-size: 0.92rem;
+}
+
+.konzept-sections .editorial-section:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .konzept-copy {
+    grid-column: 1 / -1;
+  }
+
+  /* Bild wandert direkt über seinen Textabschnitt: Beide Container lösen
+     sich per display:contents auf, die Kinder werden per order
+     miteinander verschränkt – kein DOM-Umbau, kein JS nötig. */
+  .konzept-split {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .konzept-visual,
+  .konzept-sections {
+    display: contents;
+  }
+
+  .konzept-visual-slide {
+    position: static;
+    opacity: 1;
+    transition: none;
+    height: 45vh;
+    margin-bottom: var(--space-md);
+  }
+
+  .konzept-sections .editorial-section:nth-child(1) { order: 1; }
+  .konzept-sections .editorial-section:nth-child(2) { order: 2; }
+  .konzept-sections .editorial-section:nth-child(3) { order: 3; }
+  .konzept-sections .editorial-section:nth-child(4) { order: 4; }
+  .konzept-sections .editorial-section:nth-child(5) { order: 5; }
+  .konzept-visual-slide { order: 6; }
+  .konzept-sections .editorial-section:nth-child(6) { order: 7; }
+}

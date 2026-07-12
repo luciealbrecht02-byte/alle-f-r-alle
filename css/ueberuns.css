@@ -1,0 +1,54 @@
+/* Über-Uns-Seite: gleiches One-Screen-Prinzip wie Problem.
+   Menü, Text und Foto passen exakt in 100vh – kein Scrollen. */
+
+html:has(body.page-ueberuns),
+body.page-ueberuns {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.page-ueberuns {
+  display: flex;
+  flex-direction: column;
+}
+
+body.page-ueberuns .site-header {
+  flex: none;
+}
+
+body.page-ueberuns .page-content {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: var(--space-md);
+  width: auto;
+  margin-left: 0;
+  padding: var(--space-lg) 2rem 0 2rem;
+}
+
+.page-copy {
+  grid-column: 2 / 12;
+  grid-row: 1;
+}
+
+body.page-ueberuns .page-photo {
+  grid-column: 1 / 13;
+  grid-row: 2;
+  align-self: end;
+  height: min(191.6px, 100%);
+  margin: 3rem -2rem 0;
+}
+
+@media (max-width: 768px) {
+  html:has(body.page-ueberuns),
+  body.page-ueberuns {
+    height: auto;
+    overflow: auto;
+  }
+
+  body.page-ueberuns .page-photo {
+    height: 40vh;
+  }
+}

@@ -45,4 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
       document.fonts.ready.then(setMenuHeight);
     }
   }
+
+  const forschungImage = document.querySelector(
+    "#forschung-screen-1 .forschung-room-image"
+  );
+  const forschungText = document.querySelector(
+    "#forschung-screen-1 .problem-text"
+  );
+
+  if (forschungImage && forschungText) {
+    const alignForschungImage = () => {
+      const copy = forschungText.closest(".problem-copy");
+      if (!copy) return;
+      const offset =
+        forschungText.getBoundingClientRect().top -
+        copy.getBoundingClientRect().top;
+      forschungImage.style.marginTop = offset + "px";
+    };
+
+    alignForschungImage();
+    window.addEventListener("resize", alignForschungImage);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(alignForschungImage);
+    }
+  }
 });

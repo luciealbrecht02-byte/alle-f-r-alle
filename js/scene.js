@@ -64,6 +64,14 @@ const HOTSPOTS = {
     title: "Moderation",
     text: "Sie sorgt für einen guten Start: begrüßt, stellt kurz vor, bringt den Ball ins Rollen. Übernommen wird die Rolle am besten von jemandem, der in mehreren Bubbles zu Hause ist – und nach einer Weile gerne weitergegeben.",
   },
+  starterpaket: {
+    title: "Starterpaket",
+    text: "Das „alle für alle“-Starterpaket liegt an der Tür bereit: Eisbrecherkarten auf vier Ebenen, ein Manifest mit den Grundprinzipien, ein Raumplan und ein Guide für die Moderation mit Ablauf, Zeitplan und Gesprächsregeln.",
+  },
+  wandernderraum: {
+    title: "Ein wandernder Raum",
+    text: "Der Raum bleibt nicht an einem Ort: Er wandert etwa alle vier Wochen zu einem anderen Standort der UdK weiter, damit keine Fakultät bevorzugt wird. Eine Dokumentationswand zieht mit um und macht sichtbar, was an früheren Standorten schon entstanden ist.",
+  },
 };
 
 const ROOM_WIDTH = 9;
@@ -73,6 +81,8 @@ const ROOM_HEIGHT = 3.2;
 const textureLoader = new THREE.TextureLoader();
 const icebreakerCardTexture = textureLoader.load("Fotos/Icebreaker_Kartenpng-03.png");
 icebreakerCardTexture.colorSpace = THREE.SRGBColorSpace;
+const posterTexture = textureLoader.load("Poster.png");
+posterTexture.colorSpace = THREE.SRGBColorSpace;
 
 let scene, camera, renderer, controls, raycaster, pointer;
 let defaultCameraPos, defaultTarget;
@@ -323,6 +333,38 @@ function buildRoom() {
   doorGroup.add(door);
   tagHotspot(doorGroup, "tuer");
   scene.add(doorGroup);
+
+  // Poster – "Starterpaket", hängt an derselben Wand direkt neben der Tür
+  const posterHeight = 0.85;
+  const posterWidth = posterHeight * (1655 / 2340);
+  const poster = new THREE.Mesh(
+    new THREE.PlaneGeometry(posterWidth, posterHeight),
+    new THREE.MeshStandardMaterial({ map: posterTexture, roughness: 0.5, side: THREE.DoubleSide })
+  );
+  poster.rotation.y = Math.PI / 2;
+  poster.position.set(-halfW + 0.02, 1.5, 1.3);
+  tagHotspot(poster, "starterpaket");
+  scene.add(poster);
+
+  // Umzugskarton – "Ein wandernder Raum", steht ganz außen rechts, zwischen
+  // der Gesprächsinsel (5 Stühle) und der Sessel-Insel.
+  const boxGroup = new THREE.Group();
+  const cardboardMaterial = new THREE.MeshStandardMaterial({ color: 0xb5793a, roughness: 0.85 });
+  const tapeMaterial = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.6 });
+  const movingBox = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.5, 0.55), cardboardMaterial);
+  movingBox.position.y = 0.25;
+  movingBox.castShadow = true;
+  movingBox.receiveShadow = true;
+  boxGroup.add(movingBox);
+  const tapeStripTop = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.02, 0.57), tapeMaterial);
+  tapeStripTop.position.y = 0.5;
+  boxGroup.add(tapeStripTop);
+  const tapeStripFront = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.52, 0.02), tapeMaterial);
+  tapeStripFront.position.set(0, 0.25, 0.285);
+  boxGroup.add(tapeStripFront);
+  boxGroup.position.set(3.2, 0, 0.2);
+  tagHotspot(boxGroup, "wandernderraum");
+  scene.add(boxGroup);
 
   // Decke – 4 Formate: kreativ / anpacken / wachsen / weiterdenken
   const ceilingY = ROOM_HEIGHT;
