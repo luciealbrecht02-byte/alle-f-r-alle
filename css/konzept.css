@@ -155,6 +155,15 @@
     grid-column: 1 / -1;
   }
 
+  /* Blocksatz erzeugt bei schmalen Spalten große Wortlücken, besonders
+     bei langen Komposita – auf Mobile linksbündig statt Blocksatz.
+     .lead und .editorial-body p erben text-align:justify von der
+     generischen .page-content-Regel in style.css. */
+  .konzept-copy .lead,
+  .konzept-sections .editorial-body p {
+    text-align: left;
+  }
+
   /* Bild wandert direkt über seinen Textabschnitt: Beide Container lösen
      sich per display:contents auf, die Kinder werden per order
      miteinander verschränkt – kein DOM-Umbau, kein JS nötig. */

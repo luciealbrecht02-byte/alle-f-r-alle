@@ -15,12 +15,16 @@
   min-height: 0;
 }
 
-/* .lead ist auf allen drei Screens unterschiedlich lang und bricht bei
-   manchen Fensterbreiten ein- oder zweizeilig um – das würde den
-   Abstand zu p von Screen zu Screen verschieben. Feste Mindesthöhe für
-   zwei Zeilen sorgt dafür, dass der Abstand immer identisch bleibt. */
+/* Fester Abstand .lead → p wie auf Problem/Über Uns (2rem), statt der
+   viewport-abhängigen Formel. margin-bottom auf .lead lokal auf 0,
+   gesamter Abstand über margin-top auf p – dadurch auf allen drei
+   Screens identisch. */
 .page-forschung .problem-copy .lead {
-  min-height: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25 * 2);
+  margin-bottom: 0;
+}
+
+.page-forschung .problem-copy .lead + .problem-text {
+  margin-top: 2rem;
 }
 
 /* Screen 3 ist der letzte Screen der Seite – hier soll der Inhalt nicht
@@ -67,13 +71,6 @@
   object-fit: contain;
 }
 
-@media (max-width: 900px) {
-  .bubble-diagram,
-  .forschung-bubble-image {
-    display: none;
-  }
-}
-
 /* Screen 3: statische Raumskizze an derselben Stelle wie das
    Bubble-Diagram auf Screen 1. */
 .forschung-room-image {
@@ -100,12 +97,6 @@
   margin-top: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25 * 2 + 1.25rem);
 }
 
-
-@media (max-width: 900px) {
-  .forschung-room-image {
-    display: none;
-  }
-}
 
 /* Durchgehender Bild-Bereich zwischen den Screens, gleicher Stil wie
    der Bild-Bereich auf der Startseite (weichgezeichnet + Körnung). */
@@ -134,4 +125,63 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.25;
   mix-blend-mode: overlay;
+}
+
+@media (max-width: 768px) {
+  /* Die live gerenderte 3D-Skizze bleibt auf Mobile aus (Performance/
+     Akku), die statischen Fotos werden dagegen gezeigt: volle Breite,
+     natürliches Seitenverhältnis, oberhalb des Texts (DOM-Reihenfolge). */
+  .bubble-diagram {
+    display: none;
+  }
+
+  .forschung-bubble-image,
+  .forschung-room-image {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    height: auto;
+    align-self: auto;
+    margin: 0 0 var(--space-md);
+  }
+
+  .forschung-bubble-image img,
+  .forschung-room-image img {
+    height: auto;
+  }
+
+  /* .problem-copy hat unconditional grid-row:1 (aus problem.css) – auf
+     Mobile dieselbe Zeile wie das Bild. Explizit auf Zeile 2 setzen,
+     damit Bild (Zeile 1) und Text (Zeile 2) sich stapeln statt zu
+     überlappen – gleiches Muster wie .problem-image auf Problem.html. */
+  .problem-copy {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  /* #forschung-screen-2 .problem-copy (oben, grid-column:2/7) ist
+     unconditional und hat durch die ID höhere Spezifität als die
+     Regel direkt darüber – ohne diesen Override bliebe Screen 2 auf
+     Mobile schmaler als Screen 1/3. Gleiche Selektor-Stärke nötig.
+     Auf Screen 2 und 3 zusätzlich Bild unter statt über dem Text
+     (Screen 1 bleibt Bild oben). */
+  #forschung-screen-2 .problem-copy,
+  #forschung-screen-3 .problem-copy {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  #forschung-screen-2 .forschung-bubble-image,
+  #forschung-screen-3 .forschung-room-image {
+    grid-row: 2;
+    margin: var(--space-md) 0 0;
+  }
+
+  /* #forschung-screen-3 hat unconditional min-height:auto (Desktop-
+     spezifisch, damit der Inhalt nicht auf volle Höhe gestreckt wird).
+     Auf Mobile soll der Abstand vor Screen 3 aber genauso groß sein
+     wie vor Screen 2 – dafür hier wieder auf 100vh setzen. */
+  #forschung-screen-3 {
+    min-height: 100vh;
+  }
 }

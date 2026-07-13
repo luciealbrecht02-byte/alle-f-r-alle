@@ -53,8 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
     "#forschung-screen-1 .problem-text"
   );
 
+  const mobileQuery = window.matchMedia("(max-width: 768px)");
+
   if (forschungImage && forschungText) {
     const alignForschungImage = () => {
+      // Auf Mobile stapeln sich Bild und Text (siehe forschung.css) –
+      // dort darf kein Inline-Versatz aus der Desktop-Ausrichtung stören.
+      if (mobileQuery.matches) {
+        forschungImage.style.marginTop = "";
+        return;
+      }
       const copy = forschungText.closest(".problem-copy");
       if (!copy) return;
       const offset =
@@ -84,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Vor der Messung zurücksetzen, damit sich der Versatz bei
       // wiederholten Aufrufen (Resize, Font-Load) nicht aufsummiert.
       copy.style.transform = "";
+      // Auf Mobile stapeln sich Bild und Text – kein Versatz nötig.
+      if (mobileQuery.matches) return;
       const offset =
         forschungScreen3Image.getBoundingClientRect().top -
         forschungScreen3Text.getBoundingClientRect().top;

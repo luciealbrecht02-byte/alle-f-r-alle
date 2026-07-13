@@ -16,6 +16,14 @@ body.page-problem .site-header {
   flex: none;
 }
 
+/* overflow-y:auto nur für Problem selbst – .problem-grid wird auch von
+   Forschung wiederverwendet, wo .problem-copy per JS-Transform leicht
+   über den Rand seiner Box verschoben wird (Ausrichtung an Bild/Text);
+   overflow-y:auto würde das abschneiden. */
+body.page-problem .problem-grid {
+  overflow-y: auto;
+}
+
 .problem-grid {
   flex: 1;
   min-height: 0;
@@ -62,11 +70,17 @@ body.page-problem .site-header {
   text-justify: inter-word;
 }
 
-/* Gleicher Gesamtabstand zu .lead wie auf Forschung (dort über eine
-   Mindesthöhe von zwei Zeilen auf .lead gelöst) – hier stattdessen über
-   die Position von p selbst, ohne .lead zu verändern. */
+/* Fester Abstand .lead → p wie auf Über Uns (2rem), statt der
+   viewport-abhängigen Formel. .lead selbst bleibt für Forschung
+   (das die Klasse mitverwendet) unverändert – hier stattdessen auf
+   Problem beschränkt: margin-bottom auf .lead lokal auf 0, gesamter
+   Abstand über margin-top auf p. */
+.page-problem .problem-copy .lead {
+  margin-bottom: 0;
+}
+
 .page-problem .problem-copy .problem-text {
-  margin-top: calc(clamp(1.2rem, 1.7vw, 1.6rem) * 1.25);
+  margin-top: 2rem;
 }
 
 .problem-copy .problem-text + .problem-text {
@@ -77,13 +91,14 @@ body.page-problem .site-header {
   color: #f08b88;
 }
 
+/* Fester Footer statt Grid-Zeile: bleibt immer exakt 100px hoch,
+   unabhängig davon, wie viel Platz der Fließtext oben einnimmt. Wird zu
+   knapper Platz, scrollt stattdessen .problem-grid intern. */
 .problem-image {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  align-self: end;
-  height: min(191.6px, 100%);
-  margin: 3rem -2rem 0;
-  min-height: 0;
+  flex: none;
+  width: 100%;
+  height: 100px;
+  margin: 3rem 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -128,7 +143,13 @@ body.page-problem .site-header {
   }
 
   .problem-image {
-    min-height: 40vh;
-    margin-top: var(--space-lg);
+    display: none;
+  }
+
+  /* Blocksatz erzeugt bei schmalen Spalten große Wortlücken, besonders
+     bei langen Komposita – auf Mobile linksbündig statt Blocksatz.
+     Gilt über die geteilte Klasse auch für Forschung. */
+  .problem-copy .problem-text {
+    text-align: left;
   }
 }

@@ -256,8 +256,26 @@ a {
 }
 
 @media (max-width: 768px) {
+  /* Statt komplett auszublenden: als horizontal scrollbarer Chip-Streifen
+     anzeigen, damit die Hotspot-Infos auf Mobile erreichbar bleiben, ohne
+     viel vertikalen Platz auf der Szene zu verbrauchen. Etwas mehr Abstand
+     nach unten, damit die Leiste nicht mit dem Reset-Button kollidiert. */
   .legend {
-    display: none;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 3.5rem;
+    max-width: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+
+  .legend span {
+    flex: none;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.6rem;
+    white-space: nowrap;
   }
 }
 
@@ -404,8 +422,19 @@ a {
   margin: 0 0 6rem;
 }
 
-.page-content .lead .accent {
+.page-content .accent {
   color: #f08b88;
+}
+
+/* Blocksatz erzeugt bei schmalen Spalten große Wortlücken, besonders
+   bei langen Komposita – auf Mobile linksbündig statt Blocksatz.
+   Wirkung hat kein eigenes CSS-File, daher hier auf .page-wirkung
+   beschränkt (Konzept/Über Uns lösen das in ihren eigenen Dateien). */
+@media (max-width: 768px) {
+  .page-wirkung .page-content p,
+  .page-wirkung .page-content .lead {
+    text-align: left;
+  }
 }
 
 /* Wiederverwendbares randloses Foto für Content-Seiten, gleicher Stil
